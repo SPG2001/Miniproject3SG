@@ -12,5 +12,7 @@ CREATE TABLE post (
   author_id INTEGER NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   enemy_name TEXT NOT NULL,
-  enemy_stats TEXT NOT NULL,
+  enemy_health integer NOT NULL,
+  enemy_resistance TEXT NOT NULL,
+  enemy_rank INTEGER NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id))

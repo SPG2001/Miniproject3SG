@@ -6,11 +6,18 @@
 
 {% block content %}
   <form method="post">
-    <label for="enemy_name">Title</label>
+    <label for="enemy_name">Enemy Name</label>
     <input name="enemy_name" id="enemy_name"
-      value="{{ request.form['enemy_name'] or post['enemy_name'] }}" required>
-    <label for="enemy_stats">Body</label>
-    <textarea name="enemy_stats" id="enemy_stats">{{ request.form['enemy_stats'] or post['enemy_stats'] }}</textarea>
+           value="{{ request.form['enemy_name'] or post['enemy_name'] }}" required>
+    <label for="enemy_health">Enemy Health</label>
+    <input name="enemy_health" id="enemy_health"
+           value="{{ request.form['enemy_health'] or post['enemy_health'] }}">
+    <label for="enemy_resistance">Enemy Resistance</label>
+    <input name="enemy_resistance" id="enemy_resistance"
+           value="{{ request.form['enemy_resistance'] or post['enemy_resistance'] }}">
+    <label for="enemy_rank">Enemy Rank</label>
+    <input name="enemy_rank" id="enemy_rank"
+           value="{{ request.form['enemy_rank'] or post['enemy_rank'] }}">
     <input type="submit" value="Save">
   </form>
   <hr>

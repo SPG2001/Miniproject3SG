@@ -12,7 +12,7 @@ bp = Blueprint('blog', __name__)
 def index():
     db = get_db()
     posts = db.execute(
-        'SELECT p.id, enemy_name, enemy_stats, created, author_id, username'
+        'SELECT p.id, enemy_name, enemy_health, enemy_resistance, enemy_rank, created, author_id, username'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' ORDER BY created DESC'
     ).fetchall()
@@ -23,7 +23,9 @@ def index():
 def create():
     if request.method == 'POST':
         enemy_name = request.form['enemy_name']
-        enemy_stats = request.form['enemy_stats']
+        enemy_health = request.form['enemy_health']
+        enemy_resistance = request.form['enemy_resistance']
+        enemy_rank = request.form['enemy_rank']
         error = None
 
         if not enemy_name:
@@ -34,9 +36,9 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO post (enemy_name, enemy_stats, author_id)'
-                ' VALUES (?, ?, ?)',
-                (enemy_name, enemy_stats, g.user['id'])
+                'INSERT INTO post (enemy_name, enemy_health, enemy_resistance, enemy_rank, author_id)'
+                ' VALUES (?, ?, ?, ?, ?)',
+                (enemy_name, enemy_health, enemy_resistance, enemy_rank, g.user['id'])
             )
             db.commit()
             return redirect(url_for('blog.index'))
@@ -45,7 +47,7 @@ def create():
 
 def get_post(id, check_author=True):
     post = get_db().execute(
-        'SELECT p.id, enemy_name, enemy_stats, created, author_id, username'
+        'SELECT p.id, enemy_name, enemy_health, enemy_resistance, enemy_rank, created, author_id, username'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' WHERE p.id = ?',
         (id,)
@@ -66,7 +68,9 @@ def update(id):
 
     if request.method == 'POST':
         enemy_name = request.form['enemy_name']
-        enemy_stats = request.form['enemy_stats']
+        enemy_health = request.form['enemy_health']
+        enemy_resistance = request.form['enemy_resistance']
+        enemy_rank = request.form['enemy_rank']
         error = None
 
         if not enemy_name:
@@ -77,9 +81,9 @@ def update(id):
         else:
             db = get_db()
             db.execute(
-                'UPDATE post SET enemy_name = ?, enemy_stats = ?'
+                'UPDATE post SET enemy_name = ?, enemy_health = ?, enemy_resistance = ?, enemy_rank = ?,'
                 ' WHERE id = ?',
-                (enemy_name, enemy_stats, id)
+                (enemy_name, enemy_health, enemy_resistance, enemy_rank, id)
             )
             db.commit()
             return redirect(url_for('blog.index'))
