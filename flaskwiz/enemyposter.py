@@ -1,3 +1,8 @@
+# INF601 - Advanced Programming in Python
+# Stephen Gabel
+# Mini Project 3
+
+
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
@@ -8,6 +13,8 @@ from flaskwiz.db import get_db
 
 bp = Blueprint('enemyposter', __name__)
 
+#This is where the information is pulled from the database for posts to show on index.html
+
 @bp.route('/')
 def index():
     db = get_db()
@@ -17,6 +24,8 @@ def index():
         ' ORDER BY created DESC'
     ).fetchall()
     return render_template('enemyposter/index.html', posts=posts)
+
+#When a user creates a post, this is what runs. It updates the database with the information the post contains.
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
@@ -45,6 +54,8 @@ def create():
 
     return render_template('enemyposter/create.html')
 
+#This retrieves posts.
+
 def get_post(id, check_author=True):
     post = get_db().execute(
         'SELECT p.id, enemy_name, enemy_health, enemy_resistance, enemy_rank, created, author_id, username'
@@ -60,6 +71,8 @@ def get_post(id, check_author=True):
         abort(403)
 
     return post
+
+#This is where posts are retrieved by update.html, where then the user can update them with new data.
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
@@ -90,6 +103,7 @@ def update(id):
 
     return render_template('enemyposter/update.html', post=post)
 
+#This allows a user to remove a post from the database.
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
 def delete(id):

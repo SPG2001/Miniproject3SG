@@ -4,6 +4,8 @@
   <h1>{% block title %}Edit "{{ post['enemy_name'] }}"{% endblock %}</h1>
 {% endblock %}
 
+<!--This allows a user to update posts.-->
+
 {% block content %}
   <form method="post">
     <label for="enemy_name">Enemy Name</label>
@@ -21,7 +23,7 @@
     <input type="submit" value="Save">
   </form>
   <hr>
-  <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
+  <form action="{{ url_for('enemyposter.delete', id=post['id']) }}" method="post">
     <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
   </form>
 {% endblock %}

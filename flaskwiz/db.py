@@ -1,3 +1,7 @@
+# INF601 - Advanced Programming in Python
+# Stephen Gabel
+# Mini Project 3
+
 import sqlite3
 
 import click

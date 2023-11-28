@@ -4,16 +4,18 @@
   <h1>{% block title %}New Post{% endblock %}</h1>
 {% endblock %}
 
+<!--This allows a user to create posts.-->
+
 {% block content %}
   <form method="post">
     <label for="enemy_name">Enemy Name</label>
     <input name="enemy_name" id="enemy_name" value="{{ request.form['enemy_name'] }}" required>
     <label for="enemy_health">Enemy Health</label>
-    <input name="enemy_health" id="enemy_health">{{ request.form['enemy_health'] }}</input>
+    <input name="enemy_health" id="enemy_health" value="{{ request.form['enemy_health'] }}" required>
     <label for="enemy_resistance">Enemy Resistance</label>
-    <input name="enemy_resistance" id="enemy_resistance">{{ request.form['enemy_resistance'] }}</input>
+    <input name="enemy_resistance" id="enemy_resistance" value="{{ request.form['enemy_resistance'] }}" required>
     <label for="enemy_rank">Enemy Rank</label>
-    <input name="enemy_rank" id="enemy_rank">{{ request.form['enemy_rank'] }}</input>
+    <input name="enemy_rank" id="enemy_rank" value= "{{ request.form['enemy_rank'] }}" required>
     <input type="submit" value="Save">
   </form>
 {% endblock %}
